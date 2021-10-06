@@ -14,3 +14,14 @@ jobs:
           echo "$GH_CONTEXT" | jq .
         env:
           GH_CONTEXT: ${{ toJSON(github.event) }}
+  debug-push-prd:
+    runs-on: ubuntu-latest
+    needs: debug-push
+    environment:
+      name: prd
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "$GH_CONTEXT" | jq .
+        env:
+          GH_CONTEXT: ${{ toJSON(github.event) }}
