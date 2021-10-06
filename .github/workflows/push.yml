@@ -1,0 +1,19 @@
+name: push
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  debug-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "$GH_EVENT"
+          echo "$GH_EVENT_NAME"
+        env:
+          GH_EVENT: ${{ github.event }}
+          GH_EVENT_NAME: ${{ github.event_name }}
+
