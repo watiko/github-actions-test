@@ -1,0 +1,18 @@
+name: push
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  debug-push:
+    runs-on: ubuntu-latest
+    environment:
+      name: test
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "$GH_CONTEXT" | jq .
+        env:
+          GH_CONTEXT: ${{ toJSON(github.event) }}
