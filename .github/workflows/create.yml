@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          echo "$GH_EVENT"
-          echo "$GH_EVENT_NAME"
+          echo "$GH_CONTEXT" | jq .
         env:
-          GH_EVENT: ${{ github.event }}
-          GH_EVENT_NAME: ${{ github.event_name }}
+          GH_CONTEXT: ${{ toJSON(github.event) }}
